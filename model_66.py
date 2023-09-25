@@ -229,23 +229,135 @@ def predict(predict_features_engConsModel, predict_features_cFactorModel, prefix
     plt.close()
 
 
-'''
-临时绘图
+#######################################
+# GDP、人口等预测结果绘图
+def gdp_p_predict_plot():
+    name_prefix = 'predict/'
 
-'''
-# plt.plot(data['年份'].values, data[6].values, 'bo-')  # 预测值
+    # 人口
+    plt.plot(predict_data['年份'].values, predict_data['人口预测'].values, 'bo-')  # 预测值
+    plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+    plt.xlabel('时间 - 年')
+    plt.ylabel('人口 - 万人')
+    plt.title('人口预测结果')
+    plt.legend(labels=['人口'], loc='best')
+    plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '人口预测结果')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
 
+    # GDP 预测
+    plt.figure(figsize=(16, 12))
+    for i in range(6):
+        plt.subplot(2, 3, i + 1)
+        plt.plot(predict_data['年份'].values, predict_data[predict_features_engConsModel_1[i][1]].values, 'bo-')  # GDP
+        plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+        plt.xlabel('时间 - 年')
+        plt.ylabel('GDP - 亿元')
+        plt.title(predict_features_engConsModel_1[i][1])
+        plt.legend(labels=['GDP'], loc='best')
+        plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + 'GDP预测结果')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
+
+    # 能源强度预测
+    plt.figure(figsize=(16, 12))
+    for i in range(6):
+        plt.subplot(2, 3, i + 1)
+        plt.plot(predict_data['年份'].values, predict_data[predict_features_engConsModel_1[i][2]].values, 'bo-')  # GDP
+        plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+        plt.xlabel('时间 - 年')
+        plt.ylabel('能源强度 - tec/万元')
+        plt.title(predict_features_engConsModel_1[i][2])
+        plt.legend(labels=['能源强度'], loc='best')
+        plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '自然_能源强度预测结果')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
+
+    # 化石能源占比预测
+    plt.figure(figsize=(16, 12))
+    for i in range(6):
+        plt.subplot(2, 3, i + 1)
+        plt.plot(predict_data['年份'].values, predict_data[predict_features_cFactorModel_1[i][0]].values, 'bo-')  # GDP
+        plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+        plt.xlabel('时间 - 年')
+        plt.ylabel('非化石能源占比')
+        plt.title(predict_features_cFactorModel_1[i][0])
+        plt.legend(labels=['非化石能源占比'], loc='best')
+        plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '自然_非化石能源占比')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
+
+    # 非化石能源产热电占比
+    plt.plot(predict_data['年份'].values, predict_data['非化石能源产热电占比预测'].values, 'bo-')  # 预测值
+    plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+    plt.xlabel('时间 - 年')
+    plt.ylabel('非化石能源产热电占比')
+    plt.title('非化石能源产热电占比预测')
+    plt.legend(labels=['非化石能源产热电占比'], loc='best')
+    plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '自然_非化石能源产热电占比预测')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
+
+    # 能源强度预测
+    plt.figure(figsize=(16, 12))
+    for i in range(6):
+        plt.subplot(2, 3, i + 1)
+        plt.plot(predict_data['年份'].values, predict_data[predict_features_engConsModel_2[i][2]].values, 'bo-')  # GDP
+        plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+        plt.xlabel('时间 - 年')
+        plt.ylabel('能源强度 - tec/万元')
+        plt.title(predict_features_engConsModel_1[i][2])
+        plt.legend(labels=['能源强度'], loc='best')
+        plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '按时_能源强度预测结果')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
+
+    # 化石能源占比预测
+    plt.figure(figsize=(16, 12))
+    for i in range(6):
+        plt.subplot(2, 3, i + 1)
+        plt.plot(predict_data['年份'].values, predict_data[predict_features_cFactorModel_2[i][0]].values, 'bo-')  # GDP
+        plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+        plt.xlabel('时间 - 年')
+        plt.ylabel('非化石能源占比')
+        plt.title(predict_features_cFactorModel_1[i][0])
+        plt.legend(labels=['非化石能源占比'], loc='best')
+        plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '按时_非化石能源占比')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
+
+    # 非化石能源产热电占比
+    plt.plot(predict_data['年份'].values, predict_data['非化石能源产热电占比预测_按时'].values, 'bo-')  # 预测值
+    plt.ticklabel_format(style='plain', axis='x')  # 不使用科学计数
+    plt.xlabel('时间 - 年')
+    plt.ylabel('非化石能源产热电占比')
+    plt.title('非化石能源产热电占比预测')
+    plt.legend(labels=['非化石能源产热电占比'], loc='best')
+    plt.grid(True)
+    plt.savefig(imgPathPrefix + name_prefix + '按时_非化石能源产热电占比预测')  # 存图
+    plt.show()
+    plt.clf()
+    plt.close()
 
 if __name__ == '__main__':
     plot_init()
     train_engConsModel()
     train_cFactorModel()
-    # plot_engConsModelTrainResult()
-    # plot_cFactorModelTrainResult()
-    # shap_engConsModel()
-    # shap_cFactorModel()
-    # plot_totalCEmisTrainRes()
     predict(predict_features_engConsModel_1, predict_features_cFactorModel_1, '自然')
     predict(predict_features_engConsModel_2, predict_features_cFactorModel_2, '按时')
     predict(predict_features_engConsModel_2, predict_features_cFactorModel_2, '雄心')
-
+    gdp_p_predict_plot()

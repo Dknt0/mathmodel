@@ -19,21 +19,19 @@ matplotlib.rcParams['axes.unicode_minus'] = False
 data = pd.read_csv('data/carbon.csv')
 
 # 选择特征
-# cols = ['population',  # 人口
-#         'gdp_total', 'gdp_frs', 'gdp_eng', 'gdp_ids', 'gdp_tfk', 'gdp_cst',  # GDP
-#         'engCons_total', 'engCons_frs', 'engCons_2total', 'engCons_3total', 'engCons_life',  # 能耗
-#         'ecConsVarStr_coal_total', 'ecConsVarStr_oil_total', 'ecConsVarStr_gas_total', 'ecConsVarStr_newEle', 'ecConsVarStr_otherEle',  # 能源品种
-#         'fossilProp_frs', 'fossilProp_2total', 'fossilProp_3total', 'fossilProp_life',  # 化石能源占比
-#          # 碳排放因子  数据不太好，暂时不考虑
-#         '人均GDP', '化石能源占比', '能源强度', '能源碳排强度', '碳排强度',
-#         '人口增长率', 'GDP增长率', '人均GDP增长率', '能源强度增长率', '能源碳排强度增长率'
-#         ]
+cols = ['人口',  # 人口
+        '总GDP', '农林消费部门GDP', '能源供应部门GDP', '工业消费部门GDP', '交通消费部门GDP', '建筑消费部门GDP',  # GDP
+        '农林消费部门能源消费量', '能源供应部门能源消费量', '工业消费部门能源消费量', '交通消费部门能源消费量', '建筑消费部门能源消费量', '居民生活能源消费量', # 能耗
+         # 碳排放因子  数据不太好，暂时不考虑
+        '人均GDP', '化石能源占比', '能源强度', '能源碳排强度', '碳排强度',
+        '人口增长率', 'GDP增长率', '人均GDP增长率', '能源强度增长率', '能源碳排强度增长率'
+        ]
 
-cols = ['GDP总量', '人均GDP', '能源消费总量']
+# cols = ['总GDP', '人口', '能源消费总量']
 
 # 训练模型
 model = xgb.XGBRegressor(max_depth=8, learning_rate=0.05, n_estimators=150)
-model.fit(data[cols], data['碳排放总量', 'gdp_eng'].values)
+model.fit(data[cols], data['碳排放总量'].values)
 
 # # 使用 feature importance 解释 xgboost
 plt.figure(figsize=(10, 10))
